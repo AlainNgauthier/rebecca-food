@@ -1,0 +1,53 @@
+.card {
+    height: 100px;
+    width: 367px;
+    padding: 7px;
+    margin: 16px 14px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px #00000029;
+    cursor: pointer;
+}
+
+.card__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 100px;
+    height: 85px;
+    /*height: 20%;*/
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px;
+    color: #404040;
+}
+
+.info--primary {
+    font-size: 15px;
+}
+.info--secondary {
+    font-size: 12px;
+}
+
+.horario {
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 8px;
+    opacity: 1;
+    background: #2B0D61 0% 0% no-repeat padding-box;
+    box-shadow: 0 1px 2px #00000029;
+    clip-path: circle(50% at 50% 50%);
+    margin-right: -20px;
+    margin-top: -85px;
+}
