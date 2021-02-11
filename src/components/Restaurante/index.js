@@ -1,5 +1,6 @@
 import React from 'react';
-import './Restaurante.css'
+import { Link } from 'react-router-dom';
+import './Restaurante.css';
 
 export default function Restaurante(props) {
 
@@ -13,6 +14,7 @@ export default function Restaurante(props) {
                 <div className="info">
                     <span className="info--primary">{props.name}</span>
                     <span className="info--secondary">{props.address}</span>
+                    <Link to={`/perfil/${props.id}`} className="info--acesso">Clique aqui para visitar</Link>
                 </div>
                 <div className="horario">
                     Aberto <br/> agora

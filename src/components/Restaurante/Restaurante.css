@@ -8,6 +8,11 @@
     cursor: pointer;
 }
 
+.card:hover {
+    transform: translateY(-3px);
+    transition: all .2s;
+}
+
 .card__content {
     display: flex;
     align-items: center;
@@ -30,9 +35,16 @@
 
 .info--primary {
     font-size: 15px;
+    font-weight: 700;
 }
 .info--secondary {
     font-size: 12px;
+}
+.info--acesso {
+    color: #009CA3;
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: 600;
 }
 
 .horario {

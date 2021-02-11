@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Home.css';
 
@@ -59,6 +60,7 @@ export default function Home() {
                                     name={item.name}
                                     address={item.address}
                                     image={item.image}
+                                    id={item.id}
                                     />
                             </Fragment>
                         ))}

@@ -24,6 +24,7 @@
 
 .home--title {
     margin-top: 32px;
+    font-weight: 700;
 }
 
 .home--title span {
@@ -58,7 +59,7 @@ form button {
 }
 
 .home--list {
-    margin-top: 55px;
+    margin-top: 50px;
     max-width: 1000px;
     display: flex;
     justify-content: center;
@@ -68,12 +69,40 @@ form button {
 
 
 /* Media queries */
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     .home--list {
         margin-top: 55px;
         max-width: 1200px;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    
+    .home--title {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 400;
+    }
+    .home--list {
+        margin-top: 20px;
+        max-width: 700px;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form input {
+        flex: 1;
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 45px 0 0 45px;
+        padding: 15px;
+        box-shadow: 0 2px 4px #00000029;
+        font-size: 15px;
     }
 }
