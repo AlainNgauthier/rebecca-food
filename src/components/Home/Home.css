@@ -36,6 +36,7 @@ form {
     margin-top:  32px;
     display: flex;
     align-items: center;
+    
 }
 form input {
     flex: 1;
@@ -45,6 +46,7 @@ form input {
     padding: 15px;
     box-shadow: 0 2px 4px #00000029;
     font-size: 15px;
+    outline: 0;
 }
 form button {
     background: #009CA3;
@@ -56,6 +58,7 @@ form button {
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: 0;
 }
 
 .home--list {
