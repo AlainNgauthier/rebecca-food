@@ -23,7 +23,9 @@ export default function Perfil(props) {
             const idRestaurante = props.match.params.id;
             //console.log(idRestaurante);
             const responseID = await api.get(`/restaurants/${idRestaurante}/menu`);
-            //console.log(responseID);
+            
+            // console.log(responseID.data[0]);            
+            // console.log(responseID.data[0].sales[0].description);
             setPerfil(responseID.data);
             //console.log(perfil);
             setLoad(false);
@@ -76,19 +78,20 @@ export default function Perfil(props) {
                     {searchResultado.map((item, key) => (
                         <div key={key}>
                             <Prato nome={item.name} 
-                                    //description={item.sales.description} 
+                                    // description={item[0].sales.description} 
                                     preco={item.price} 
                                     imagem={item.image}
                                     categoria={item.group}
                             />
+                            {/* {console.log(searchResultado[0].sales)} */}
                         </div>
                     ))} 
                  </div> :
                 <div className="content__wrap">   
-                    {perfil.map((item, key) => (
-                        <div key={key}>
+                    {perfil.map((item, index) => (
+                        <div key={index}>
                             <Prato nome={item.name} 
-                                    //description={item.sales.description} 
+                                    // description={item.sales.description} 
                                     preco={item.price} 
                                     imagem={item.image}
                                     categoria={item.group}

@@ -12,7 +12,7 @@ export default function Prato(props) {
                 </div>
                 <div className="card-prato__description">
                     <span className="prato--nome">{props.nome}</span>
-                    <span className="prato--description"> Lorem ipsum dolor sit amet, consectetur... </span>
+                    <span className="prato--description"> {props.description} </span>
                     <span className="prato-categoria">Categoria: <strong>{props.categoria}</strong></span>
                     <span className="prato--preco">R$ {props.preco}</span>
                 </div>
