@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import ReactDom from 'react-dom';
+
 //import { Link } from 'react-router-dom';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Home.css';
@@ -20,6 +20,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        
         async function load(){
             const resto = 'restaurants';
             const listaRestaurantes = await api.get(`/${resto}`);
@@ -30,22 +31,26 @@ export default function Home() {
             //console.log(restaurantes);
         }
 
-        /*const results = restaurantes.filter(resto => resto.name === searchTerm);
-        setSearchResult(results);
-        setFilter(true);*/
-
         load();
     },[]);
 
 
     const filtrando = useCallback((e) => {
         e.preventDefault();
-        const results = restaurantes.filter(resto => resto.name === searchTerm);
+
+        if(searchTerm === ''){
+            setFilter(false)
+        }
+
+        const results = restaurantes.filter(resto => resto.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        //deixar tudo em minísculo pra facilitar a busca
         /* resto => resto.name === searchTerm */
         if(results) {
             setFilter(true);
             setSearchResult(results);
+            //console.log(searchResult);
         }
+        
     },[restaurantes, searchTerm]);
     
     if(loading) {
@@ -76,6 +81,7 @@ export default function Home() {
                     </form>
                     {filter ? 
                         <div className="home--list">
+                            
                             {
                                 searchResult.map((item, key) => (
                                     <Fragment key={key}>
