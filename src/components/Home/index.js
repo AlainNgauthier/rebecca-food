@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-
+import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
+import { ThemeContext } from '../../Context/ThemeContext';
 //import { Link } from 'react-router-dom';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Home.css';
@@ -8,12 +8,13 @@ import api from '../Services/api';
 import Restaurante from '../Restaurante/index';
 
 export default function Home() {
-    const [filter, setFilter] = useState(false); //filtro
+    const [filter, setFilter] = useState(false); //filtro de resto
     const [restaurantes, setRestaurantes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     
+    const { theme } = useContext(ThemeContext);
 
     const handleChange = event => {
         setSearchTerm(event.target.value);
@@ -29,9 +30,10 @@ export default function Home() {
             //console.log(restaurantes);
             setLoading(false);
             //console.log(restaurantes);
-        }
 
+        }
         load();
+
     },[]);
 
 
@@ -63,7 +65,7 @@ export default function Home() {
 
     return(
         <Fragment>
-            <div className="home">
+            <div className={theme ? 'home dark--home' : 'home'}>
                 <div className="home__wrap">
                     <div className="home--title">
                         <span>Bem-vindo ao Rebecca Food</span>

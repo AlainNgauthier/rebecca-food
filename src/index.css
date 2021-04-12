@@ -12,3 +12,8 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: #F7F7F7;
 }
+
+.dark--body {
+  background: #222;
+  color: #f1f1f1;
+}

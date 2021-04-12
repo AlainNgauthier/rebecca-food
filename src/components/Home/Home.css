@@ -9,6 +9,11 @@
     padding: 10px;
 }
 
+.dark--home {
+    background: #222;
+    color: #f1f1f1;
+}
+
 .home__loading {
     display: flex;
     height: 90vh;
