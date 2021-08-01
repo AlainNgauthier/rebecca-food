@@ -2,7 +2,7 @@
 
 Rebecca Food is a personal project built with the JS library ReactJs. React Hooks, Context API and Fetch API are some of techniques used to create this application.
 Firstly, to satisfy the users preferencies, the site can be visited on light or dark mode clicking on the right corner button.
-On the home page, there is a list of restaurants and a form for search. Depending of the schedule, a restaurant will be open or closed (open between 10am and 9pm).
+On the home page, there is a list of restaurants and a form for search. Depending on the schedule, a restaurant will be open or closed (open between 10am and 9pm). The user can get acces to the page of each restaurant listed on the home page.
 
 
 
