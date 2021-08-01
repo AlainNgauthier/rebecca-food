@@ -1,0 +1,34 @@
+.loader {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+circle {
+  fill: none;
+  stroke: #454545;
+  stroke-width: 10px;
+  stroke-dasharray: 100 100; /* */
+  stroke-dashoffset: 70;
+  animation: rotation 2s ease-in-out alternate infinite;
+}
+
+.svg {
+  transform: translateX(-50px);
+  filter: drop-shadow(
+    100px 0 #009ca3
+  ); /* creer un ombre et decaller a 100px sur X et 0 sur Y*/
+}
+
+@keyframes rotation {
+  0% {
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 70;
+  }
+
+  100% {
+    stroke-dasharray: 20 20;
+    stroke-dashoffset: -600;
+  }
+}

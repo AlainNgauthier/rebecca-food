@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
 import { ThemeContext } from '../../Context/ThemeContext';
+import Loader from '../Loader';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Home.css';
 
@@ -52,7 +53,7 @@ export default function Home() {
     if(loading) {
         return(
             <div className="home__loading">
-                Carregando...
+                <Loader />
             </div>
         )
     }
@@ -62,7 +63,7 @@ export default function Home() {
             <div className={theme ? 'home dark--home' : 'home'}>
                 <div className="home__wrap">
                     <div className="home--title">
-                        <span>Bem-vindo ao Rebecca Food</span>
+                        <span>Bem-vindo ao Rebecca Food!</span>
                     </div>
                     <form onSubmit={filtrando}>
                         <input 

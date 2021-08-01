@@ -6,11 +6,8 @@ import './Restaurante.css';
 export default function Card(props) {
     const { name, address, id, image, hours } = props;
     const [aberto, setAberto] = useState(false);
-
-    let listDays = [];
     
     const [from, to, days]  = hours;
-    console.log(hours);
 
     const todayDate = new Date();
     const day = todayDate.getDate();
@@ -45,9 +42,9 @@ export default function Card(props) {
 
                 }
                 {aberto ? 
-                    <span>Aberto</span>
+                    <span className="schedule">Aberto</span>
                 :
-                    <span>Fechado</span>
+                    <span className="schedule">Fechado</span>
                 }
                 </div>
             </div>
