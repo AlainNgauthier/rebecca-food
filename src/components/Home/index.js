@@ -1,15 +1,14 @@
 import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
 import { ThemeContext } from '../../Context/ThemeContext';
-//import { Link } from 'react-router-dom';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Home.css';
 
 import api from '../Services/api';
-import Restaurante from '../Restaurante/index';
+import Card from '../Card/index';
 
 export default function Home() {
-    const [filter, setFilter] = useState(false); //filtro de resto
-    const [restaurantes, setRestaurantes] = useState([]);
+    const [filter, setFilter] = useState(false);
+    const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResult, setSearchResult] = useState([]);
@@ -24,13 +23,10 @@ export default function Home() {
         
         async function load(){
             const resto = 'restaurants';
-            const listaRestaurantes = await api.get(`/${resto}`);
-            //console.log(listaRestaurantes.data);
-            setRestaurantes(listaRestaurantes.data);
-            //console.log(restaurantes);
+            const listaCards = await api.get(`/${resto}`);
+            setCards(listaCards.data);
+            //console.log(cards);
             setLoading(false);
-            //console.log(restaurantes);
-
         }
         load();
 
@@ -44,16 +40,14 @@ export default function Home() {
             setFilter(false)
         }
 
-        const results = restaurantes.filter(resto => resto.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        const results = cards.filter(resto => resto.name.toLowerCase().includes(searchTerm.toLowerCase()));
         //deixar tudo em minísculo pra facilitar a busca
-        /* resto => resto.name === searchTerm */
         if(results) {
             setFilter(true);
             setSearchResult(results);
-            //console.log(searchResult);
         }
         
-    },[restaurantes, searchTerm]);
+    },[cards, searchTerm]);
     
     if(loading) {
         return(
@@ -82,30 +76,34 @@ export default function Home() {
                         </button>
                     </form>
                     {filter ? 
-                        <div className="home--list">
-                            
+                        <div className="home--list">                           
                             {
                                 searchResult.map((item, key) => (
                                     <Fragment key={key}>
-                                        <Restaurante 
+                                        <Card 
                                             name={item.name}
                                             address={item.address}
                                             image={item.image}
                                             id={item.id}
+                                            hours={item.hours}
                                         />
                                     </Fragment>
                             ))}
                         </div> :
                         <div className="home--list">
                             {
-                                restaurantes.map((item, key) => (
+                                cards.map((item, key) => (
                                     <Fragment key={key}>
-                                        <Restaurante 
-                                            name={item.name}
-                                            address={item.address}
-                                            image={item.image}
-                                            id={item.id}
-                                        />
+                                        {key !== 2 && 
+                                            <Card 
+                                                name={item.name}
+                                                address={item.address}
+                                                image={item.image}
+                                                id={item.id}
+                                                hours={item.hours}
+                                            />
+                                        
+                                        }
                                     </Fragment>
                             ))}
                         </div>

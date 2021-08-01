@@ -7,10 +7,11 @@
 }
 
 body {
+  height: 100vh;
   margin: 0;
   padding: 30px;
-  font-family: 'Montserrat', sans-serif;
-  background: #F7F7F7;
+  font-family: "Montserrat", sans-serif;
+  background: #f7f7f7;
 }
 
 .dark--body {
