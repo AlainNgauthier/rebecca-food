@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import './Perfil.css';
+import Loader from '../Loader';
 import api from '../Services/api';
 
 import Prato from '../Prato/index';
@@ -55,7 +56,7 @@ export default function Perfil(props) {
     if(load) {
         return(
           <div className="perfil__loading">
-            Carregando...
+            <Loader />
           </div>
         )
       }
