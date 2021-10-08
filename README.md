@@ -1,14 +1,11 @@
-## Rebecca Food Project
+## Rebecca Food
 
-Rebecca Food is a personal project built with the JS library ReactJs. React Hooks, Context API and Fetch API are some of techniques used to create this application.
-Firstly, to satisfy the users preferencies, the site can be visited on light or dark mode clicking on the right corner button.
-On the home page, there is a list of restaurants and a form for search. Depending on the schedule, a restaurant will be open or closed (open between 10am and 9pm). The user can get acces to the page of each restaurant listed on the home page.
-
-
-
-
-
-
+Rebecca Food is a personal food store project built in ReactJs. <br/>
+React Hooks, Context API and Axios are some of techniques I used to create this web application.<br/>
+On the home page, there's a list of restaurants and a form for search.
+Each restaurant has a special page where the user can see the menu availaible for tht day.
+Depending on the schedule, a restaurant is open or closed (open between 10am and 9pm).<br/>
+To satisfy the users preferencies, the site can be visited on light or dark mode by a click on the right corner button.
 ### Getting Started
 
 In the project directory, you can run:
@@ -20,13 +17,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-#### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.

@@ -8,17 +8,26 @@ export default function Card(props) {
     const [aberto, setAberto] = useState(false);
     
     const [from, to, days]  = hours;
+    let array = [];
+    hours.map((item, index) => { 
+        //console.log(item.from);
+        const from = item.from.split(':');
+        array.push(...from);
+    });
+    console.log(array);
 
     const todayDate = new Date();
     const day = todayDate.getDate();
     const hour = todayDate.getHours();
-
+    
     useEffect(() => {
         hours.map((item, key) => {
         const scheduleFrom = item.from.split(':');
         const scheduleTo = item.to.split(':');
         if(item.days.includes(day) && hour >= scheduleFrom[0] && hour < scheduleTo[0]) {
-                setAberto(true);               
+            // console.log('from', scheduleFrom[0]);
+            // console.log('to', scheduleTo[0]);
+            setAberto(true);               
         }
         });
     }, []);
