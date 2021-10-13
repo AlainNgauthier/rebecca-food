@@ -4,59 +4,67 @@ import { ThemeContext } from '../../Context/ThemeContext';
 import './Restaurante.css';
 
 export default function Card(props) {
-    const { name, address, id, image, hours } = props;
-    const [aberto, setAberto] = useState(false);
-    
-    const [from, to, days]  = hours;
-    let array = [];
-    hours.map((item, index) => { 
-        //console.log(item.from);
-        const from = item.from.split(':');
-        array.push(...from);
-    });
-    console.log(array);
-
-    const todayDate = new Date();
-    const day = todayDate.getDate();
-    const hour = todayDate.getHours();
-    
-    useEffect(() => {
-        hours.map((item, key) => {
-        const scheduleFrom = item.from.split(':');
-        const scheduleTo = item.to.split(':');
-        if(item.days.includes(day) && hour >= scheduleFrom[0] && hour < scheduleTo[0]) {
-            // console.log('from', scheduleFrom[0]);
-            // console.log('to', scheduleTo[0]);
-            setAberto(true);               
-        }
-        });
-    }, []);
-
 
     const { theme } = useContext(ThemeContext);
+    const { name, address, id, image, hours } = props;
+    const [aberto, setAberto] = useState(false);
+    // console.log(hours);
 
+    let partitions = hours.length;
+    let daysOpen = [];
+    for(let i = 0; i < partitions; i++) {
+        daysOpen[i] = {
+            days : hours[i].days,
+            start : hours[i].from,
+            end : hours[i].to,
+        }
+    }
+    console.log('daysOpen ', daysOpen);
+
+    let diaHoje = new Date();
+    const dia = diaHoje.getDay();
+    console.log('dia de agora: ', dia);
+    const hora = diaHoje.getHours();
+    console.log('hora de agora: ', hora);
+    
+    useEffect(() => {
+        for (let i = 0; i < partitions; i++) {
+            const inicio = daysOpen[i].start.split(':');
+            console.log('inicio ', parseInt(inicio[0]));
+            const fechamento = daysOpen[i].end.split(':');
+            console.log('fecha: ', parseInt(fechamento[0]));
+            for (let j = 0; j < daysOpen[i].days.length; j++) {
+                if(daysOpen[i].days[j] == dia 
+                        && hora >= inicio[0] 
+                            && hora < parseInt(fechamento[0])) {
+                    console.log('yes');
+                    setAberto(true);
+                }
+            }
+        }
+    }, [hora]);
+    
     return(
-        <div className={theme ? 'card card--dark' : 'card' }>
-            <div className="card__content">
-                <div className="logo">
-                    <img src={image} alt="logo" />
-                </div>
-                <div className="info">
-                    <span className="info--primary">{name}</span>
-                    <span className="info--secondary">{address}</span>
-                    <Link to={`/perfil/${id}`} className="info--acesso">Clique aqui para visitar</Link>
-                </div>
-                <div className="horario">
-                {
-
-                }
-                {aberto ? 
-                    <span className="schedule">Aberto</span>
-                :
-                    <span className="schedule">Fechado</span>
-                }
+        <Link to={`/perfil/${id}`}>
+            <div className={theme ? 'card card--dark' : 'card' }>
+                <div className="card__content">
+                    <div className="logo">
+                        <img src={image} alt="logo" />
+                    </div>
+                    <div className="info">
+                        <span className="info--primary">{name}</span>
+                        <span className="info--secondary">{address}</span>
+                        
+                    </div>
+                    <div className="horario">
+                        {aberto ? (
+                            <span className="schedule">Aberto</span>
+                        ) : (
+                            <span className="schedule">Fechado</span>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }

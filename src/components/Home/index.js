@@ -26,14 +26,12 @@ export default function Home() {
             const resto = 'restaurants';
             const listaCards = await api.get(`/${resto}`);
             setCards(listaCards.data);
-            //console.log(cards);
             setLoading(false);
         }
         load();
 
     },[]);
-
-
+    // console.log(cards);
     const filtrando = useCallback((e) => {
         e.preventDefault();
 
@@ -95,7 +93,7 @@ export default function Home() {
                             {
                                 cards.map((item, key) => (
                                     <Fragment key={key}>
-                                        {key !== 2 && 
+                                        {key !== 2 &&
                                             <Card 
                                                 name={item.name}
                                                 address={item.address}
