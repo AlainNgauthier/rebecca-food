@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { ThemeContext } from '../../Context/ThemeContext';
 import Loader from '../Loader';
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -11,13 +11,15 @@ export default function Home() {
     const [filter, setFilter] = useState(false);
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     
     const { theme } = useContext(ThemeContext);
 
-    const handleChange = event => {
-        setSearchTerm(event.target.value);
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setSearchTerm(value);
+        filtrando();
     }
 
     useEffect(() => {
@@ -29,26 +31,29 @@ export default function Home() {
             setLoading(false);
         }
         load();
+    }, []);
 
-    },[]);
-    // console.log(cards);
-    const filtrando = useCallback((e) => {
+    const onSubmit = e => {
         e.preventDefault();
+        filtrando();
+    }
 
-        if(searchTerm === ''){
-            setFilter(false)
+    const filtrando = useCallback(() => {
+        if (searchTerm === ''){
+            setFilter(false);
         }
 
-        const results = cards.filter(resto => resto.name.toLowerCase().includes(searchTerm.toLowerCase()));
-        //deixar tudo em minísculo pra facilitar a busca
-        if(results) {
-            setFilter(true);
+        const results = cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+        if (results.length > 0) {
             setSearchResult(results);
+            setFilter(true);
+        } else {
+            setFilter(false);
         }
-        
-    },[cards, searchTerm]);
+    }, [cards, searchTerm]);
     
-    if(loading) {
+    if (loading) {
         return(
             <div className="home__loading">
                 <Loader />
@@ -57,28 +62,30 @@ export default function Home() {
     }
 
     return(
-        <Fragment>
-            <div className={theme ? 'home dark--home' : 'home'}>
+        <>
+            <main className={theme ? 'home dark--home' : 'home'}>
                 <div className="home__wrap">
                     <div className="home--title">
-                        <span>Bem-vindo ao Rebecca Food!</span>
+                        <h1>Bem-vindo ao Rebecca Food!</h1>
                     </div>
-                    <form onSubmit={filtrando}>
+                    <form onSubmit={onSubmit}>
                         <input 
                             type="text"
                             placeholder="Buscar"
+                            name="resto"
                             value={searchTerm}
                             onChange={handleChange}
+                            onBlur={handleChange}
                         />
                         <button type="submit">
                             <BiSearchAlt2 size={22} />
                         </button>
                     </form>
                     {filter ? 
-                        <div className="home--list">                           
+                        (<section className="home--list">                           
                             {
                                 searchResult.map((item, key) => (
-                                    <Fragment key={key}>
+                                    <div key={key}>
                                         <Card 
                                             name={item.name}
                                             address={item.address}
@@ -86,29 +93,27 @@ export default function Home() {
                                             id={item.id}
                                             hours={item.hours}
                                         />
-                                    </Fragment>
+                                    </div>
                             ))}
-                        </div> :
-                        <div className="home--list">
+                        </section> 
+                        ) : (
+                        <section className="home--list">
                             {
                                 cards.map((item, key) => (
-                                    <Fragment key={key}>
-                                        {key !== 2 &&
+                                    <div key={key}>
                                             <Card 
                                                 name={item.name}
                                                 address={item.address}
                                                 image={item.image}
                                                 id={item.id}
-                                                hours={item.hours}
+                                                // hours={item.hours}
                                             />
-                                        
-                                        }
-                                    </Fragment>
+                                    </div>
                             ))}
-                        </div>
-                    } 
+                        </section>
+                    )} 
                 </div>
-            </div>
-        </Fragment>
+            </main>
+        </>
     )
 }
